@@ -12,4 +12,5 @@ func TestCredential(t *testing.T) {
 	cred := NewCredential()
 	err := cred.FromBytes([]byte(testdata.VCDoc))
 	assert.NoError(t, err)
+	t.Logf("zero value: %s\n", cred.ToString())
 }

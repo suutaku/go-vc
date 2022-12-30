@@ -34,6 +34,30 @@ func NewCredential() *Credential {
 	return &Credential{}
 }
 
+// MarshalJSON defines custom marshalling of rawCredential to JSON.
+func (rc *Credential) MarshalJSON() ([]byte, error) {
+	type Alias Credential
+
+	alias := (*Alias)(rc)
+
+	return MarshalWithCustomFields(alias, rc.CustomFields)
+}
+
+// UnmarshalJSON defines custom unmarshalling of rawCredential from JSON.
+func (rc *Credential) UnmarshalJSON(data []byte) error {
+	type Alias Credential
+
+	alias := (*Alias)(rc)
+	rc.CustomFields = make(map[string]interface{})
+
+	err := UnmarshalWithCustomFields(data, alias, rc.CustomFields)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (cred *Credential) FromBytes(b []byte) error {
 	return json.Unmarshal(b, cred)
 }
