@@ -105,6 +105,8 @@ func (p *Processor) GetCanonicalDocument(doc map[string]interface{}, opts ...Pro
 	ldOptions.ProduceGeneralizedRdf = true
 	if procOptions.documentLoader != nil {
 		ldOptions.DocumentLoader = procOptions.documentLoader
+	} else {
+		ldOptions.DocumentLoader = ld.NewCachingDocumentLoader(ld.NewDefaultDocumentLoader(nil))
 	}
 
 	if len(procOptions.externalContexts) > 0 {
@@ -161,6 +163,8 @@ func (p *Processor) Compact(input, context map[string]interface{},
 	ldOptions.ProduceGeneralizedRdf = true
 	if procOptions.documentLoader != nil {
 		ldOptions.DocumentLoader = procOptions.documentLoader
+	} else {
+		ldOptions.DocumentLoader = ld.NewCachingDocumentLoader(ld.NewDefaultDocumentLoader(nil))
 	}
 
 	if context == nil {
@@ -189,6 +193,8 @@ func (p *Processor) Frame(inputDoc map[string]interface{}, frameDoc map[string]i
 	ldOptions.OmitGraph = true
 	if procOptions.documentLoader != nil {
 		ldOptions.DocumentLoader = procOptions.documentLoader
+	} else {
+		ldOptions.DocumentLoader = ld.NewCachingDocumentLoader(ld.NewDefaultDocumentLoader(nil))
 	}
 
 	proc := ld.NewJsonLdProcessor()
@@ -426,6 +432,8 @@ func fromRDF(docStatements []string, context interface{},
 	ldOptions.ProduceGeneralizedRdf = true
 	if procOptions.documentLoader != nil {
 		ldOptions.DocumentLoader = procOptions.documentLoader
+	} else {
+		ldOptions.DocumentLoader = ld.NewCachingDocumentLoader(ld.NewDefaultDocumentLoader(nil))
 	}
 
 	doc := strings.Join(docStatements, "\n")
