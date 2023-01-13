@@ -28,6 +28,6 @@ func (lpc *LinkedDataProofContext) ToContext() *Context {
 	}
 }
 
-func (lpc *LinkedDataProofContext) Validate() bool {
-	return true
+func (lpc *LinkedDataProofContext) Validate() error {
+	return nil
 }
