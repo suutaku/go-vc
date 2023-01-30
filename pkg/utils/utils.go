@@ -10,6 +10,12 @@ type FormatedTime struct {
 	time.Time
 }
 
+func NewFormatedTime() *FormatedTime {
+	return &FormatedTime{
+		time.Now(),
+	}
+}
+
 func (ft *FormatedTime) UnmarshalJSON(data []byte) (err error) {
 	if string(data) == "{}" {
 		return nil

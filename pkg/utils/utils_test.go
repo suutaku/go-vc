@@ -35,4 +35,10 @@ func TestFormatedTime(t *testing.T) {
 	err = json.Unmarshal([]byte(testByes3), &testMap)
 	assert.NoError(t, err)
 	t.Logf("%#v\n", testMap)
+
+	tm := NewFormatedTime()
+	assert.NotEmpty(t, tm)
+	str, err := json.Marshal(tm)
+	assert.NoError(t, err)
+	t.Logf("%s\n", str)
 }
