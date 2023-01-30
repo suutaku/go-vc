@@ -114,7 +114,6 @@ func (p *Processor) GetCanonicalDocument(doc map[string]interface{}, opts ...Pro
 	}
 
 	proc := ld.NewJsonLdProcessor()
-
 	view, err := proc.Normalize(doc, ldOptions)
 	if err != nil {
 		return nil, fmt.Errorf("failed to normalize JSON-LD document: %w", err)

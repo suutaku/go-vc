@@ -15,5 +15,6 @@ func TestBuilder(t *testing.T) {
 	assert.NoError(t, err)
 	result, err := proc.GetCanonicalDocument(cred.ToMap())
 	assert.NoError(t, err)
+	assert.NotNil(t, result)
 	t.Logf("%s\n", result)
 }

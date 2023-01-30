@@ -4,18 +4,21 @@ import (
 	"encoding/json"
 
 	"github.com/suutaku/go-vc/pkg/credential"
-	"github.com/suutaku/go-vc/pkg/proof"
 )
 
 type Presentation struct {
 	Context    []string                `json:"@context,omitempty"`
 	Id         string                  `json:"id,omitempty"`
 	Credential []credential.Credential `json:"verifiableCredential,omitempty"`
-	Proof      []*proof.Proof          `json:"proof,omitempty"`
+	Proof      []interface{}           `json:"proof,omitempty"`
 }
 
 func NewPresentation() *Presentation {
-	return &Presentation{}
+	return &Presentation{
+		Context:    make([]string, 0),
+		Credential: make([]credential.Credential, 0),
+		Proof:      make([]interface{}, 0),
+	}
 }
 
 func (pr *Presentation) FromBytes(b []byte) error {
