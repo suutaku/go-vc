@@ -2,13 +2,13 @@ package builders
 
 import (
 	"github.com/suutaku/go-bbs/pkg/bbs"
+	"github.com/suutaku/go-vc/pkg/common"
 	"github.com/suutaku/go-vc/pkg/credential"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/resolver"
 	"github.com/suutaku/go-vc/pkg/suite"
 	"github.com/suutaku/go-vc/pkg/suite/bbsblssignature2020"
 	"github.com/suutaku/go-vc/pkg/suite/bbsblssignatureproof2020"
-	"github.com/suutaku/go-vc/pkg/utils"
 )
 
 type VCBuilder struct {
@@ -29,7 +29,7 @@ func NewVCBuilder(opts ...BuilderOption) *VCBuilder {
 	}
 	// if no linked data proof context parsed, create default context
 	if options.ldpCtx == nil {
-		created := new(utils.FormatedTime)
+		created := new(common.FormatedTime)
 		created.UnmarshalJSON([]byte("2019-12-03T12:19:52Z"))
 		options.ldpCtx = &proof.LinkedDataProofContext{
 			SignatureType:           "BbsBlsSignature2020",
@@ -43,7 +43,7 @@ func NewVCBuilder(opts ...BuilderOption) *VCBuilder {
 	}
 }
 
-func (vcb *VCBuilder) SignCredential(cred *credential.Credential) (*credential.Credential, error) {
+func (vcb *VCBuilder) AddLinkedDataProof(cred *credential.Credential) (*credential.Credential, error) {
 	s := vcb.options.signatureSuites[vcb.options.ldpCtx.SignatureType]
 	err := cred.AddLinkedDataProof(s, vcb.options.ldpCtx, vcb.options.processorOpts...)
 	return cred, err

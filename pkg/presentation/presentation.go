@@ -3,27 +3,25 @@ package presentation
 import (
 	"encoding/json"
 
+	"github.com/suutaku/go-vc/pkg/common"
 	"github.com/suutaku/go-vc/pkg/credential"
-	"github.com/suutaku/go-vc/pkg/utils"
 )
 
 type Presentation struct {
-	Context    interface{} `json:"@context,omitempty"`
-	ID         string      `json:"id,omitempty"`
-	Type       interface{} `json:"type,omitempty"`
-	Credential interface{} `json:"verifiableCredential,omitempty"`
-	Holder     string      `json:"holder,omitempty"`
-	Proof      interface{} `json:"proof,omitempty"`
-	JWT        string      `json:"jwt,omitempty"`
+	Context    interface{}             `json:"@context,omitempty"`
+	ID         string                  `json:"id,omitempty"`
+	Type       interface{}             `json:"type,omitempty"`
+	Credential []credential.Credential `json:"verifiableCredential,omitempty"`
+	Holder     string                  `json:"holder,omitempty"`
+	Proof      []interface{}           `json:"proof,omitempty"`
+	JWT        string                  `json:"jwt,omitempty"`
 	// All unmapped fields are put here.
 	CustomFields map[string]interface{} `json:"-"`
 }
 
 func NewPresentation() *Presentation {
 	return &Presentation{
-		Context:    make([]string, 0),
-		Credential: make([]credential.Credential, 0),
-		Proof:      make([]interface{}, 0),
+		Context: make([]string, 0),
 	}
 }
 
@@ -33,7 +31,7 @@ func (pr *Presentation) MarshalJSON() ([]byte, error) {
 
 	alias := (*Alias)(pr)
 
-	return utils.MarshalWithCustomFields(alias, pr.CustomFields)
+	return common.MarshalWithCustomFields(alias, pr.CustomFields)
 }
 
 // UnmarshalJSON defines custom unmarshalling of rawPresentation from JSON.
@@ -43,7 +41,7 @@ func (pr *Presentation) UnmarshalJSON(data []byte) error {
 	alias := (*Alias)(pr)
 	pr.CustomFields = make(map[string]interface{})
 
-	err := utils.UnmarshalWithCustomFields(data, alias, pr.CustomFields)
+	err := common.UnmarshalWithCustomFields(data, alias, pr.CustomFields)
 	if err != nil {
 		return err
 	}

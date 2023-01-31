@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/sirupsen/logrus"
-	"github.com/suutaku/go-vc/pkg/utils"
+	"github.com/suutaku/go-vc/pkg/common"
 )
 
 const (
@@ -25,16 +25,16 @@ const (
 
 // Context holds signing options and private key.
 type Context struct {
-	SignatureType           string              // required
-	Creator                 string              // required
-	SignatureRepresentation int                 // optional
-	Created                 *utils.FormatedTime // optional
-	Domain                  string              // optional
-	Nonce                   []byte              // optional
-	VerificationMethod      string              // optional
-	Challenge               string              // optional
-	Purpose                 string              // optional
-	CapabilityChain         []interface{}       // optional
+	SignatureType           string               // required
+	Creator                 string               // required
+	SignatureRepresentation int                  // optional
+	Created                 *common.FormatedTime // optional
+	Domain                  string               // optional
+	Nonce                   []byte               // optional
+	VerificationMethod      string               // optional
+	Challenge               string               // optional
+	Purpose                 string               // optional
+	CapabilityChain         []interface{}        // optional
 }
 
 func (context *Context) Validate() error {
@@ -42,7 +42,7 @@ func (context *Context) Validate() error {
 		return errors.New("signature type is missing")
 	}
 	if context.Created == nil || context.Created.IsZero() {
-		context.Created = &utils.FormatedTime{Time: time.Now()}
+		context.Created = &common.FormatedTime{Time: time.Now()}
 	}
 	if context.Purpose == "" {
 		context.Purpose = defaultProofPurpose
@@ -51,18 +51,18 @@ func (context *Context) Validate() error {
 }
 
 type Proof struct {
-	Context                 interface{}         `json:"@context,omitempty"`
-	Type                    string              `json:"type,omitempty"`
-	Created                 *utils.FormatedTime `json:"created,omitempty"`
-	Creator                 string              `json:"creator,omitempty"`
-	VerificationMethod      string              `json:"verificationMethod,omitempty"`
-	ProofValue              string              `json:"proofValue,omitempty"`
-	JWS                     string              `json:"jws,omitempty"`
-	ProofPurpose            string              `json:"proofPurpose,omitempty"`
-	Domain                  string              `json:"domain,omitempty"`
-	Nonce                   []byte              `json:"nonce,omitempty"`
-	Challenge               string              `json:"challenge,omitempty"`
-	SignatureRepresentation int                 `json:"-"`
+	Context                 interface{}          `json:"@context,omitempty"`
+	Type                    string               `json:"type,omitempty"`
+	Created                 *common.FormatedTime `json:"created,omitempty"`
+	Creator                 string               `json:"creator,omitempty"`
+	VerificationMethod      string               `json:"verificationMethod,omitempty"`
+	ProofValue              string               `json:"proofValue,omitempty"`
+	JWS                     string               `json:"jws,omitempty"`
+	ProofPurpose            string               `json:"proofPurpose,omitempty"`
+	Domain                  string               `json:"domain,omitempty"`
+	Nonce                   []byte               `json:"nonce,omitempty"`
+	Challenge               string               `json:"challenge,omitempty"`
+	SignatureRepresentation int                  `json:"-"`
 	// CapabilityChain must be an array. Each element is either a string or an object.
 	CapabilityChain []interface{} `json:"capabilityChain,omitempty"`
 }

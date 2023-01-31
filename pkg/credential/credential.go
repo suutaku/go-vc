@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/suutaku/go-vc/pkg/common"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/schema"
-	"github.com/suutaku/go-vc/pkg/utils"
 )
 
 type Credential struct {
@@ -16,8 +16,8 @@ type Credential struct {
 	Id      string                 `json:"id,omitempty"`
 	Type    []string               `json:"type,omitempty"`
 	Issuer  string                 `json:"issuer,omitempty"`
-	Issued  *utils.FormatedTime    `json:"issuanceDate,omitempty"`
-	Expired *utils.FormatedTime    `json:"expirationDate,omitempty"`
+	Issued  *common.FormatedTime   `json:"issuanceDate,omitempty"`
+	Expired *common.FormatedTime   `json:"expirationDate,omitempty"`
 	Subject interface{}            `json:"credentialSubject,omitempty"`
 	Proof   interface{}            `json:"proof,omitempty"`
 	Status  map[string]interface{} `json:"credentialStatus,omitempty"`
@@ -41,7 +41,7 @@ func (rc *Credential) MarshalJSON() ([]byte, error) {
 
 	alias := (*Alias)(rc)
 
-	return utils.MarshalWithCustomFields(alias, rc.CustomFields)
+	return common.MarshalWithCustomFields(alias, rc.CustomFields)
 }
 
 // UnmarshalJSON defines custom unmarshalling of rawCredential from JSON.
@@ -51,7 +51,7 @@ func (rc *Credential) UnmarshalJSON(data []byte) error {
 	alias := (*Alias)(rc)
 	rc.CustomFields = make(map[string]interface{})
 
-	err := utils.UnmarshalWithCustomFields(data, alias, rc.CustomFields)
+	err := common.UnmarshalWithCustomFields(data, alias, rc.CustomFields)
 	if err != nil {
 		return err
 	}

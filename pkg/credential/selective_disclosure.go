@@ -6,11 +6,11 @@ import (
 
 	"github.com/suutaku/go-vc/internal/processor"
 	"github.com/suutaku/go-vc/internal/tools"
+	"github.com/suutaku/go-vc/pkg/common"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/resolver"
 	"github.com/suutaku/go-vc/pkg/suite"
 	"github.com/suutaku/go-vc/pkg/suite/bbsblssignatureproof2020"
-	"github.com/suutaku/go-vc/pkg/utils"
 )
 
 const (
@@ -161,7 +161,7 @@ func generateSignatureProof(blsSignature map[string]interface{}, resolver resolv
 	if err != nil {
 		return nil, fmt.Errorf("derive BBS+ proof: %w", err)
 	}
-	twrap := &utils.FormatedTime{}
+	twrap := &common.FormatedTime{}
 	twrap.UnmarshalJSON([]byte(blsSignature["created"].(string)))
 	derivedProof := &proof.Proof{
 		Type:               signatureProofType,

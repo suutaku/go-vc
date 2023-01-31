@@ -104,7 +104,7 @@ func TestLinkedDataProof(t *testing.T) {
 	cred := getTestCredential(t)
 	assert.NotNil(t, cred, "cannot get credential")
 
-	signedCred, err := iBuilder.SignCredential(cred)
+	signedCred, err := iBuilder.AddLinkedDataProof(cred)
 	assert.NoError(t, err, "issuer cannot sign credential")
 	t.Logf("signed credential:\n%s\n", signedCred.ToString())
 
@@ -124,7 +124,7 @@ func TestSelectiveDisclosure(t *testing.T) {
 	cred := getTestCredential(t)
 	assert.NotNil(t, cred, "cannot get credential")
 
-	signed, err := iBuilder.SignCredential(cred)
+	signed, err := iBuilder.AddLinkedDataProof(cred)
 	assert.NoError(t, err, "issuer cannot sign credential")
 	t.Logf("signed credential:\n%s\n", signed.ToString())
 
