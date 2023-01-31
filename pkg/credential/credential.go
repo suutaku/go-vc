@@ -167,3 +167,14 @@ func (cred *Credential) ValidateAgainstSchema(schema *schema.VCJSONSchema) error
 	}
 	return schema.ValidateSubject(subject)
 }
+
+type DocVerificationData struct {
+	RevealIndexes        []int
+	RevealDocumentResult map[string]interface{}
+	DocumentStatements   []string
+}
+
+type VerificationData struct {
+	BlsMessages   [][]byte
+	RevealIndexes []int
+}
