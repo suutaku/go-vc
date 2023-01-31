@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/suutaku/go-vc/pkg/proof"
+	"github.com/suutaku/go-vc/pkg/schema"
 	"github.com/suutaku/go-vc/pkg/utils"
 )
 
@@ -40,7 +41,7 @@ func (rc *Credential) MarshalJSON() ([]byte, error) {
 
 	alias := (*Alias)(rc)
 
-	return MarshalWithCustomFields(alias, rc.CustomFields)
+	return utils.MarshalWithCustomFields(alias, rc.CustomFields)
 }
 
 // UnmarshalJSON defines custom unmarshalling of rawCredential from JSON.
@@ -50,7 +51,7 @@ func (rc *Credential) UnmarshalJSON(data []byte) error {
 	alias := (*Alias)(rc)
 	rc.CustomFields = make(map[string]interface{})
 
-	err := UnmarshalWithCustomFields(data, alias, rc.CustomFields)
+	err := utils.UnmarshalWithCustomFields(data, alias, rc.CustomFields)
 	if err != nil {
 		return err
 	}
@@ -157,4 +158,12 @@ func GetBLSProofs(raw interface{}) ([]map[string]interface{}, error) {
 	}
 
 	return blsProofs, nil
+}
+
+func (cred *Credential) ValidateAgainstSchema(schema *schema.VCJSONSchema) error {
+	subject, ok := cred.Subject.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("invalid subject")
+	}
+	return schema.ValidateSubject(subject)
 }

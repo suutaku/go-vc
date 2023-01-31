@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/google/uuid v1.3.0
 	github.com/piprate/json-gold v0.5.0
+	github.com/santhosh-tekuri/jsonschema/v5 v5.1.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
 )
