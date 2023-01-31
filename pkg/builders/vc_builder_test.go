@@ -1,7 +1,6 @@
 package builders
 
 import (
-	"embed"
 	"encoding/hex"
 	"testing"
 
@@ -10,6 +9,7 @@ import (
 	"github.com/suutaku/go-vc/internal/processor"
 	"github.com/suutaku/go-vc/pkg/credential"
 	"github.com/suutaku/go-vc/pkg/resolver"
+	"github.com/suutaku/go-vc/testdata"
 )
 
 const (
@@ -21,17 +21,8 @@ const (
 	holderKeyPath                  string = "holder-private-key.txt"
 )
 
-var (
-	//go:embed testdata
-	testVector embed.FS
-)
-
-func getTestResource(name string) ([]byte, error) {
-	return testVector.ReadFile("testdata/" + name)
-}
-
 func genIssuerBuilderAndPublicKeyResolver(t *testing.T) (*VCBuilder, resolver.PublicKeyResolver) {
-	iKeyStr, err := getTestResource(issuerKeyPath)
+	iKeyStr, err := testdata.GetTestResource(issuerKeyPath)
 	assert.NoError(t, err, "cannot get test resource")
 	iKeyBytes, err := hex.DecodeString(string(iKeyStr))
 	assert.NoError(t, err, "private key decode failed")
@@ -49,7 +40,7 @@ func genIssuerBuilderAndPublicKeyResolver(t *testing.T) (*VCBuilder, resolver.Pu
 }
 
 func genHolderBuilderAndPublicKeyResolver(t *testing.T) (*VCBuilder, resolver.PublicKeyResolver) {
-	hKeyStr, err := getTestResource(holderKeyPath)
+	hKeyStr, err := testdata.GetTestResource(holderKeyPath)
 	assert.NoError(t, err, "cannot get test resource")
 	hKeyBytes, err := hex.DecodeString(string(hKeyStr))
 	assert.NoError(t, err, "private key decode failed")
@@ -67,7 +58,7 @@ func genHolderBuilderAndPublicKeyResolver(t *testing.T) (*VCBuilder, resolver.Pu
 }
 
 func getTestCredential(t *testing.T) *credential.Credential {
-	credBytes, err := getTestResource(credentialDocPath)
+	credBytes, err := testdata.GetTestResource(credentialDocPath)
 	assert.NoError(t, err, "cannot get test credential doc")
 	cred := credential.NewCredential()
 	err = cred.FromBytes(credBytes)
@@ -76,7 +67,7 @@ func getTestCredential(t *testing.T) *credential.Credential {
 }
 
 func getTestRevealedCredential(t *testing.T) *credential.Credential {
-	credBytes, err := getTestResource(credentialRevealedDocPath)
+	credBytes, err := testdata.GetTestResource(credentialRevealedDocPath)
 	assert.NoError(t, err, "cannot get test revealed credential doc")
 	cred := credential.NewCredential()
 	err = cred.FromBytes(credBytes)
@@ -85,7 +76,7 @@ func getTestRevealedCredential(t *testing.T) *credential.Credential {
 }
 
 func getTestBlindRevealedCredential(t *testing.T) *credential.Credential {
-	credBytes, err := getTestResource(credentialBlindRevealedDocPath)
+	credBytes, err := testdata.GetTestResource(credentialBlindRevealedDocPath)
 	assert.NoError(t, err, "cannot get test revealed credential doc")
 	cred := credential.NewCredential()
 	err = cred.FromBytes(credBytes)
