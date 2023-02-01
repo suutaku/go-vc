@@ -2,6 +2,7 @@ package ldcontext
 
 import (
 	"encoding/json"
+	"net/http"
 
 	"github.com/suutaku/go-vc/pkg/common"
 )
@@ -43,6 +44,14 @@ type JSONLDContext struct {
 
 func NewJSONLDContext() *JSONLDContext {
 	return &JSONLDContext{}
+}
+
+func (ldc *JSONLDContext) FromURL(url string) error {
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	return json.NewDecoder(resp.Body).Decode(ldc)
 }
 
 func (ldc *JSONLDContext) FromBytes(b []byte) error {
