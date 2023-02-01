@@ -8,7 +8,6 @@ import (
 
 	"github.com/suutaku/go-vc/pkg/common"
 	"github.com/suutaku/go-vc/pkg/proof"
-	"github.com/suutaku/go-vc/pkg/schema"
 )
 
 type Credential struct {
@@ -60,14 +59,11 @@ func (rc *Credential) UnmarshalJSON(data []byte) error {
 }
 
 func (cred *Credential) FromBytes(b []byte) error {
-	return json.Unmarshal(b, cred)
+	return cred.UnmarshalJSON(b)
 }
 
 func (cred *Credential) ToBytes() []byte {
-	b, err := json.Marshal(cred)
-	if err != nil {
-		return nil
-	}
+	b, _ := cred.MarshalJSON()
 	return b
 }
 
@@ -158,14 +154,6 @@ func GetBLSProofs(raw interface{}) ([]map[string]interface{}, error) {
 	}
 
 	return blsProofs, nil
-}
-
-func (cred *Credential) ValidateAgainstSchema(schema *schema.VCJSONSchema) error {
-	subject, ok := cred.Subject.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("invalid subject")
-	}
-	return schema.ValidateSubject(subject)
 }
 
 type DocVerificationData struct {

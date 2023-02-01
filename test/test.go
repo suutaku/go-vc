@@ -1,6 +1,9 @@
-package testdata
+package test
 
-import "embed"
+import (
+	"embed"
+	"path"
+)
 
 var (
 	//go:embed *
@@ -8,6 +11,5 @@ var (
 )
 
 func GetTestResource(name string) ([]byte, error) {
-
-	return testVector.ReadFile(name)
+	return testVector.ReadFile(path.Join("data", name))
 }

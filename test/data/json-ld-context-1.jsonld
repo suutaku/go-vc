@@ -1,0 +1,27 @@
+{
+  "@context":{
+    "account":{
+      "@id":"https://schema.affinidi.com/accountV1-1.jsonld",
+      "@context":{
+        "@version":1.1,
+        "@protected":true
+      }
+    }, 
+    "name":{
+      "@id":"schema-id:name",
+      "@type":"https://schema.org/Text"
+    },
+    "phoneNumber":{
+      "@id":"schema-id:phoneNumber",
+      "@type":"https://schema.org/Text"
+    },
+    "age":{
+      "@id":"schema-id:age",
+      "@type":"https://schema.org/Text"
+    },
+    "gender":{
+      "@id":"schema-id:gender",
+      "@type":"https://schema.org/Text"
+    }
+  }
+}

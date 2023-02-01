@@ -1,0 +1,21 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/bls12381-2020/v1"
+  ],
+  "id": "did:cot:6u3SCqoKfARwgbssjie1agpsoPitjKwkeFZxtJGb5BqY",
+  "controller": "did:cot:6u3SCqoKfARwgbssjie1agpsoPitjKwkeFZxtJGb5BqY",
+  "verificationMethod": [
+    {
+      "id": "did:cot:6u3SCqoKfARwgbssjie1agpsoPitjKwkeFZxtJGb5BqY#owner",
+      "type": "JsonWebKey2020",
+      "controller": "did:cot:6u3SCqoKfARwgbssjie1agpsoPitjKwkeFZxtJGb5BqY",
+      "publicKeyBase58": "v1shWqumxfV2rdx6emHS6n5D8pM8MS6sQLfAyEzVhBfepuceM6csZX6MsK3y5SsZr9mRuAMrXFo7Xv2TjARd8unsPhjVA3LHnGS5jgxT3j9uWJev6RT2bv3d2CiK6qcq3ZG",
+      "publicKeyJwk": {
+        "kty": "EC",
+        "crv": "BLS12381_G2",
+        "x": "meawYCyxpo1C-3lnzqdNup48VDQ5h2wkAyW-MPvKy2EIgYWY6w4oO9nj3uo7AqFQEOleagLaY6gIj0K-KyOQkDud3tXp-Vt8oAubaA3eMKJ2xblSEohLI2p5OqpRnweH"
+      }
+    }
+  ]
+}
