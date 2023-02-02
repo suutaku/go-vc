@@ -38,6 +38,13 @@ func (ctx *Context) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+func (ctx *Context) ToMap() map[string]interface{} {
+	ret := make(map[string]interface{})
+	b, _ := ctx.MarshalJSON()
+	json.Unmarshal(b, &ret)
+	return ret
+}
+
 type JSONLDContext struct {
 	Context Context `json:"@context"`
 }

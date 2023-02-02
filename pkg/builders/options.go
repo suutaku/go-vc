@@ -41,7 +41,7 @@ func WithPrivateKey(priv *bbs.PrivateKey) BuilderOption {
 // WithProcessorOptions will parse to json-ld processor
 func WithProcessorOptions(processorOpts ...processor.ProcessorOpts) BuilderOption {
 	return func(opts *builderOption) {
-		opts.processorOpts = processorOpts
+		opts.processorOpts = append(opts.processorOpts, processorOpts...)
 	}
 }
 
@@ -54,7 +54,11 @@ func WithLinkedDataProofContext(ldpCtx *proof.LinkedDataProofContext) BuilderOpt
 
 // prepareOpts prepare builderOptions.
 func prepareOpts(opts []BuilderOption) *builderOption {
-	procOpts := &builderOption{}
+	procOpts := &builderOption{
+		processorOpts: []processor.ProcessorOpts{
+			processor.WithValidateRDF(),
+		},
+	}
 	for _, opt := range opts {
 		opt(procOpts)
 	}
