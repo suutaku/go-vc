@@ -10,6 +10,7 @@ import (
 )
 
 type builderOption struct {
+	did             string
 	signatureSuites map[string]suite.SignatureSuite
 	processorOpts   []processor.ProcessorOpts
 	ldpCtx          *proof.LinkedDataProofContext
@@ -49,6 +50,12 @@ func WithProcessorOptions(processorOpts ...processor.ProcessorOpts) BuilderOptio
 func WithLinkedDataProofContext(ldpCtx *proof.LinkedDataProofContext) BuilderOption {
 	return func(opts *builderOption) {
 		opts.ldpCtx = ldpCtx
+	}
+}
+
+func WithDID(did string) BuilderOption {
+	return func(opts *builderOption) {
+		opts.did = did
 	}
 }
 

@@ -36,7 +36,7 @@ func genIssuerBuilderAndPublicKeyResolver(t *testing.T) (*VCBuilder, resolver.Pu
 		Type:  "Bls12381G2Key2020",
 		Value: pubBytes,
 	}, nil)
-	builder := NewVCBuilder(WithPrivateKey(iPriv), WithProcessorOptions(processor.WithValidateRDF()))
+	builder := NewVCBuilder(WithPrivateKey(iPriv), WithDID("did:cot:6u3SCqoKfARwgbssjie1agpsoPitjKwkeFZxtJGb5BqY"), WithProcessorOptions(processor.WithValidateRDF()))
 	return builder, pubResv
 }
 
@@ -171,5 +171,27 @@ func TestBlindSign(t *testing.T) {
 	err = hBuilder.Verify(cred, iResolver)
 	assert.NoError(t, err, "invalid signature")
 	t.Logf("signed credential:\n%s\n", cred.ToString())
+}
 
+func TestStatusCredential(t *testing.T) {
+	iBuilder, iResolver := genIssuerBuilderAndPublicKeyResolver(t)
+	assert.NotNil(t, iBuilder, "cannot create issuer builder")
+	assert.NotNil(t, iResolver, "cannot create issuer public key resolver")
+
+	cred := getTestCredential(t)
+	assert.NotNil(t, cred, "cannot get credential")
+
+	sigend, err := iBuilder.AddLinkedDataProof(cred)
+	assert.NoError(t, err)
+	statusCred, err := iBuilder.GenStatusCredential("http://ssis.cotnetwork.com/status/3", []credential.Credential{*sigend})
+	assert.NoError(t, err)
+	assert.NotEmpty(t, statusCred)
+	err = iBuilder.Verify(statusCred, iResolver)
+	assert.NoError(t, err)
+	t.Logf("%s\n", statusCred.ToString())
+	pass, err := iBuilder.ValidateStatusCredential(statusCred, sigend, iResolver)
+	assert.NoError(t, err)
+	assert.True(t, pass)
+	err = iBuilder.Verify(statusCred, iResolver)
+	assert.NoError(t, err)
 }

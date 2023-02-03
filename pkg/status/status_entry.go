@@ -1,9 +1,7 @@
 package status
 
 const (
-	currentStatusRevoked = "revoked"
-
-	statusList2021Entry = "StatusList2021Entry"
+	StatusList2021Entry = "StatusList2021Entry"
 )
 
 // StatusList2021Entry

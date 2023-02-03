@@ -25,25 +25,17 @@ func TestBitstring(t *testing.T) {
 	credList := []credential.Credential{
 		*cred,
 	}
-	bstr, err := GenBitstring(credList)
-	assert.NoError(t, err)
-	t.Logf("%s\n", bstr)
-	exp, err := ExpanBistring(bstr)
+	bitStr := GenBitstring(credList)
+	t.Logf("%s\n", bitStr.Compressed())
 	assert.NoError(t, err)
 	bitIdx, err := strconv.ParseInt(cred.Status["statusListIndex"].(string), 10, 64)
 	assert.NoError(t, err)
 
-	checkIdx := 0
-	for k, v := range exp {
-		if v > 0 {
-			checkIdx = k * 8
-			for v != 0 {
-				v = v << 1
-				checkIdx++
-			}
-		}
-	}
-	assert.Equal(t, int(bitIdx), int(checkIdx))
-	t.Logf("check index %d\n", checkIdx)
+	check, err := bitStr.Check(int(bitIdx))
+	assert.NoError(t, err)
+	assert.True(t, check)
 
+	check2, err := bitStr.Check(int(bitIdx - 1))
+	assert.NoError(t, err)
+	assert.False(t, check2)
 }
