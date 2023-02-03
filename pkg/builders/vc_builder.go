@@ -85,7 +85,7 @@ func (vcb *VCBuilder) Verify(cred *credential.Credential, issuerPubResolver reso
 // 3) Generate a compressed bitstring by passing issued credentials to the Bitstring Generation Algorithm.
 // 4) Set the encodedList to compressed bitstring.
 // 5) Generate a proof for the RLC and publish it to the endpoint listed in the verifiable credential.
-func (vcb *VCBuilder) GenStatusCredential(id string, issuedCred []credential.Credential) (*credential.Credential, error) {
+func (vcb *VCBuilder) GenStatusCredentialList(id string, issuedCred []credential.Credential) (*credential.Credential, error) {
 	preBuildCred := &credential.Credential{
 		Context: []string{
 			common.DefaultVCJsonLDContext,
@@ -100,7 +100,7 @@ func (vcb *VCBuilder) GenStatusCredential(id string, issuedCred []credential.Cre
 		Issuer: vcb.options.did,
 		Subject: map[string]interface{}{
 			"type":          status.StatusList2021,
-			"statusPurpose": status.StatusPurpose,
+			"statusPurpose": status.StatusPurposeRevocation,
 		},
 	}
 	statCred, err := status.GenStatusCredential(issuedCred, preBuildCred)

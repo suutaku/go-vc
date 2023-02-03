@@ -48,8 +48,8 @@ func GenBitstring(issuedCredentials []credential.Credential) *BitString {
 		if v.Status["type"] != StatusList2021Entry {
 			continue
 		}
-		// not Revoked
-		if v.Status["statusPurpose"] != StatusPurpose {
+		//  Revocation purpose
+		if v.Status["statusPurpose"] != StatusPurposeRevocation {
 			continue
 		}
 		// must have index

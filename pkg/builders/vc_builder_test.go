@@ -183,7 +183,7 @@ func TestStatusCredential(t *testing.T) {
 
 	sigend, err := iBuilder.AddLinkedDataProof(cred)
 	assert.NoError(t, err)
-	statusCred, err := iBuilder.GenStatusCredential("http://ssis.cotnetwork.com/status/3", []credential.Credential{*sigend})
+	statusCred, err := iBuilder.GenStatusCredentialList("http://ssis.cotnetwork.com/status/3", []credential.Credential{*sigend})
 	assert.NoError(t, err)
 	assert.NotEmpty(t, statusCred)
 	err = iBuilder.Verify(statusCred, iResolver)

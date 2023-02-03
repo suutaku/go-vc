@@ -7,8 +7,9 @@ import (
 )
 
 const (
-	StatusList2021 = "StatusList2021"
-	StatusPurpose  = "revocation"
+	StatusList2021          = "StatusList2021"
+	StatusPurposeRevocation = "revocation"
+	StatusPurposeSuspension = "suspension"
 )
 
 // GenStatusCredential
@@ -21,5 +22,3 @@ func GenStatusCredential(issuedCreds []credential.Credential, preBuildCred *cred
 	preBuildCred.Subject.(map[string]interface{})["encodedList"] = bitStr.Compressed()
 	return preBuildCred, nil
 }
-
-// func ValidateStatusCredential(credToValid *credential.Credential) {}
