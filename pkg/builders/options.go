@@ -71,3 +71,9 @@ func prepareOpts(opts []BuilderOption) *builderOption {
 	}
 	return procOpts
 }
+
+func (bo *builderOption) Merge(opts []BuilderOption) {
+	for _, opt := range opts {
+		opt(bo)
+	}
+}

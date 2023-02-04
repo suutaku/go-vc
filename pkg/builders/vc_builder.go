@@ -47,33 +47,40 @@ func NewVCBuilder(opts ...BuilderOption) *VCBuilder {
 	}
 }
 
-func (vcb *VCBuilder) AddLinkedDataProof(cred *credential.Credential) (*credential.Credential, error) {
+func (vcb *VCBuilder) AddLinkedDataProof(cred *credential.Credential, opts ...BuilderOption) (*credential.Credential, error) {
+	// reset options if need
+	vcb.options.Merge(opts)
 	s := vcb.options.signatureSuites[vcb.options.ldpCtx.SignatureType]
 	err := cred.AddLinkedDataProof(s, vcb.options.ldpCtx, vcb.options.processorOpts...)
 	return cred, err
 }
 
-func (vcb *VCBuilder) GenerateBBSSelectiveDisclosure(cred, revealed *credential.Credential, pubResolver resolver.PublicKeyResolver, nonce []byte) (*credential.Credential, error) {
+func (vcb *VCBuilder) GenerateBBSSelectiveDisclosure(cred, revealed *credential.Credential, pubResolver resolver.PublicKeyResolver, nonce []byte, opts ...BuilderOption) (*credential.Credential, error) {
+	vcb.options.Merge(opts)
 	s := vcb.options.signatureSuites["BbsBlsSignatureproof2020"]
 	return cred.GenerateBBSSelectiveDisclosure(s, revealed, pubResolver, nonce, vcb.options.processorOpts...)
 }
 
-func (vcb *VCBuilder) PreBlindSign(cred, revealed *credential.Credential, issuerPubResolver resolver.PublicKeyResolver, nonce []byte) (*bbs.BlindSignatureContext, []int, int, error) {
+func (vcb *VCBuilder) PreBlindSign(cred, revealed *credential.Credential, issuerPubResolver resolver.PublicKeyResolver, nonce []byte, opts ...BuilderOption) (*bbs.BlindSignatureContext, []int, int, error) {
+	vcb.options.Merge(opts)
 	s := vcb.options.signatureSuites["BbsBlsSignature2020"]
 	return cred.PreBlindSign(s, revealed, vcb.options.ldpCtx, issuerPubResolver, nonce, vcb.options.processorOpts...)
 }
 
-func (vcb *VCBuilder) BlindSign(revealed *credential.Credential, ctx *bbs.BlindSignatureContext, revealedIndexs []int, msgCount int, nonce []byte) (*bbs.BlindSignature, error) {
+func (vcb *VCBuilder) BlindSign(revealed *credential.Credential, ctx *bbs.BlindSignatureContext, revealedIndexs []int, msgCount int, nonce []byte, opts ...BuilderOption) (*bbs.BlindSignature, error) {
+	vcb.options.Merge(opts)
 	s := vcb.options.signatureSuites["BbsBlsSignature2020"]
 	return revealed.BlindSign(s, ctx, revealedIndexs, msgCount, vcb.options.ldpCtx, nonce, vcb.options.processorOpts...)
 }
 
-func (vcb *VCBuilder) CompleteSignature(cred *credential.Credential, blindSig *bbs.BlindSignature) error {
+func (vcb *VCBuilder) CompleteSignature(cred *credential.Credential, blindSig *bbs.BlindSignature, opts ...BuilderOption) error {
+	vcb.options.Merge(opts)
 	s := vcb.options.signatureSuites["BbsBlsSignature2020"]
 	return cred.CompleteSignature(s, vcb.options.ldpCtx, blindSig)
 }
 
-func (vcb *VCBuilder) Verify(cred *credential.Credential, issuerPubResolver resolver.PublicKeyResolver) error {
+func (vcb *VCBuilder) Verify(cred *credential.Credential, issuerPubResolver resolver.PublicKeyResolver, opts ...BuilderOption) error {
+	vcb.options.Merge(opts)
 	return cred.VerifyProof(vcb.options.signatureSuites, issuerPubResolver, vcb.options.processorOpts...)
 }
 

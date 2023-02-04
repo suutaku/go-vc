@@ -6,9 +6,7 @@ require (
 	gitee.com/cotnetwork/dids v0.0.0-20230128151723-7655875951de
 	github.com/btcsuite/btcutil v1.0.2
 	github.com/google/uuid v1.3.0
-	github.com/gorilla/mux v1.8.0
 	github.com/piprate/json-gold v0.5.0
-	github.com/santhosh-tekuri/jsonschema/v5 v5.1.1
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
 	github.com/suutaku/go-bbs v0.0.0-20230128100940-bbf42a26767b
