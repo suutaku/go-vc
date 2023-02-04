@@ -26,5 +26,5 @@ func (pbk *PublicKey) Equal(x crypto.PublicKey) bool {
 
 // PublicKeyResolver resolve publick key value and type, return a PublicKey
 type PublicKeyResolver interface {
-	Resolve(id string) *PublicKey
+	Resolve(id string) (*PublicKey, error)
 }

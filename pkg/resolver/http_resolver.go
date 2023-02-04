@@ -22,34 +22,34 @@ func NewHTTPResolver() *HTTPResolver {
 	return &HTTPResolver{}
 }
 
-func (res *HTTPResolver) Resolve(url string) *PublicKey {
+func (res *HTTPResolver) Resolve(url string) (*PublicKey, error) {
 	resp, err := http.Get(url)
 	if err != nil {
-		return nil
+		return nil, err
 	}
 	did := &dids.DIDDocument{}
 	err = json.NewDecoder(resp.Body).Decode(did)
 	if err != nil || len(did.VerificationMethod) == 0 {
-		return nil
+		return nil, err
 	}
 	ret := &PublicKey{Type: did.VerificationMethod[0].Type}
 
 	switch ret.Type {
 	case ldKeyType:
 		if did.VerificationMethod[0].PublicKeyJWK.Crv != "BLS12381_G2" || did.VerificationMethod[0].PublicKeyJWK.Kty != "EC" {
-			return nil
+			return nil, err
 		}
 		ret.Jwk, err = base64.URLEncoding.DecodeString(did.VerificationMethod[0].PublicKeyJWK.X)
 		if err != nil {
-			return nil
+			return nil, err
 		}
 	case typeG2:
 		ret.Value = base58.Decode(did.VerificationMethod[0].PublicKeyBase58)
 		if ret.Value == nil {
-			return nil
+			return nil, err
 		}
 	case typeG1:
-		return nil
+		return nil, err
 	}
-	return ret
+	return ret, nil
 }

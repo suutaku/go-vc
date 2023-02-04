@@ -12,10 +12,10 @@ func NewTestPublicKeyResolver(pub *PublicKey, variants map[string]*PublicKey) *T
 	}
 }
 
-func (pkrsv *TestPublicKeyResolver) Resolve(id string) *PublicKey {
+func (pkrsv *TestPublicKeyResolver) Resolve(id string) (*PublicKey, error) {
 	if len(pkrsv.variants) > 0 {
-		return pkrsv.variants[id]
+		return pkrsv.variants[id], nil
 	}
 
-	return pkrsv.pubKey
+	return pkrsv.pubKey, nil
 }

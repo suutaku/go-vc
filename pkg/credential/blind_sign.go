@@ -58,9 +58,9 @@ func (cred *Credential) PreBlindSign(s suite.SignatureSuite, revealDoc *Credenti
 	if err != nil {
 		return nil, nil, 0, err
 	}
-	pbk := issuerPubResolver.Resolve(pid)
+	pbk, err := issuerPubResolver.Resolve(pid)
 	if pbk == nil {
-		return nil, nil, 0, fmt.Errorf("cannot resolve public key")
+		return nil, nil, 0, fmt.Errorf("cannot resolve public key: %w", err)
 	}
 	pubKeyValue := pbk.Value
 	if p.SignatureRepresentation == proof.SignatureJWS {

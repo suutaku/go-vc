@@ -20,7 +20,8 @@ func TestHTTPResolver(t *testing.T) {
 	}))
 	defer ts.Close()
 	resolver := NewHTTPResolver()
-	pub := resolver.Resolve(ts.URL + "/holder-did.json")
+	pub, err := resolver.Resolve(ts.URL + "/holder-did.json")
+	assert.NoError(t, err)
 	assert.NotNil(t, pub)
 	t.Logf("%v\n", pub)
 

@@ -21,7 +21,15 @@ type Presentation struct {
 
 func NewPresentation() *Presentation {
 	return &Presentation{
-		Context: make([]string, 0),
+		Context: []string{
+			common.DefaultVCJsonLDContext,
+			common.DefaultBbsJsonLDContext,
+		},
+		Type: []string{
+			common.DefaultVCJsonLDContextTypeVC,
+			// common.DefaultVCJsonLDContextTypeCMP,
+		},
+		Credential: make([]credential.Credential, 0),
 	}
 }
 
@@ -59,6 +67,14 @@ func (pr *Presentation) ToBytes() []byte {
 		return nil
 	}
 	return b
+}
+
+func (pr *Presentation) ToString() string {
+	b, err := json.MarshalIndent(pr, "", "  ")
+	if err != nil {
+		return ""
+	}
+	return string(b)
 }
 
 func (pr *Presentation) ToMap() map[string]interface{} {
