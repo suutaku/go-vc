@@ -3,6 +3,7 @@ package resolver
 import (
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"gitee.com/cotnetwork/dids/pkg/dids"
@@ -37,7 +38,7 @@ func (res *HTTPResolver) Resolve(url string) (*PublicKey, error) {
 	switch ret.Type {
 	case ldKeyType:
 		if did.VerificationMethod[0].PublicKeyJWK.Crv != "BLS12381_G2" || did.VerificationMethod[0].PublicKeyJWK.Kty != "EC" {
-			return nil, err
+			return nil, fmt.Errorf("invalid jwk")
 		}
 		ret.Jwk, err = base64.URLEncoding.DecodeString(did.VerificationMethod[0].PublicKeyJWK.X)
 		if err != nil {
