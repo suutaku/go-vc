@@ -26,7 +26,13 @@ func (prb *PRBuilder) AddLinkedDataProof(pr *presentation.Presentation, opts ...
 		if err != nil {
 			return nil, err
 		}
-		pr.Proof[k] = v.Proof
+
+		if proofs, ok := v.Proof.([]interface{}); ok {
+			pr.Proof[k] = proofs[len(proofs)-1]
+		} else {
+			pr.Proof[k] = v.Proof
+		}
+
 	}
 	return pr, nil
 }
