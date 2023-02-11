@@ -26,8 +26,8 @@ func NewPresentation() *Presentation {
 			common.DefaultBbsJsonLDContext,
 		},
 		Type: []string{
-			common.DefaultVCJsonLDContextTypeVC,
-			// common.DefaultVCJsonLDContextTypeCMP,
+			// common.DefaultVCJsonLDContextTypeVC,
+			common.DefaultVCJsonLDContextTypePR,
 		},
 		Credential: make([]credential.Credential, 0),
 	}

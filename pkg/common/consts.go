@@ -6,5 +6,5 @@ const (
 	DefaultStatusVCJsonLDContext string = "https://w3id.org/vc/status-list/2021/v1"
 	DefaultVCJsonLDContextTypeSC string = "StatusList2021Credential"
 	DefaultVCJsonLDContextTypeVC string = "VerifiableCredential"
-	// DefaultVCJsonLDContextTypeCMP string = "CredentialManagerPresentation"
+	DefaultVCJsonLDContextTypePR string = "VerifiablePresentation"
 )
