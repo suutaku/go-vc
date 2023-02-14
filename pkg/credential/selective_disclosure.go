@@ -191,7 +191,7 @@ func getPublicKeyAndSignature(pmap map[string]interface{}, pubResolver resolver.
 	}
 	pbk, err := pubResolver.Resolve(pid)
 	if err != nil {
-		return nil, nil, fmt.Errorf("cannot resolve public key: %w", err)
+		return nil, nil, fmt.Errorf("cannot resolve public key %s: %w", pid, err)
 	}
 	pubKeyValue := pbk.Value
 	if p.SignatureRepresentation == proof.SignatureJWS {
