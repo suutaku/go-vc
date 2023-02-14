@@ -8,7 +8,7 @@ import (
 )
 
 type Context struct {
-	Version      float32                `json:"@version,omitempty"`
+	Version      string                 `json:"@version,omitempty"`
 	Protected    bool                   `json:"@protected,omitempty"`
 	Id           string                 `json:"id,omitempty"`
 	Type         string                 `json:"type,omitempty"`
