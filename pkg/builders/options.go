@@ -1,15 +1,12 @@
 package builders
 
 import (
-	"github.com/piprate/json-gold/ld"
 	"github.com/suutaku/go-bbs/pkg/bbs"
 	"github.com/suutaku/go-vc/pkg/processor"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/suite"
 	"github.com/suutaku/go-vc/pkg/suite/bbsblssignature2020"
 	"github.com/suutaku/go-vc/pkg/suite/bbsblssignatureproof2020"
-	"github.com/suutaku/ld-loader/pkg/loader"
-	loaderstorage "github.com/suutaku/ld-loader/pkg/storage"
 )
 
 type builderOption struct {
@@ -67,9 +64,6 @@ func prepareOpts(opts []BuilderOption) *builderOption {
 	procOpts := &builderOption{
 		processorOpts: []processor.ProcessorOpts{
 			processor.WithValidateRDF(),
-			processor.WithDocumentLoader(
-				loader.NewCachingDocumentLoader(ld.NewDefaultDocumentLoader(nil), loaderstorage.LocalKVStorageType),
-			),
 		},
 	}
 	for _, opt := range opts {
