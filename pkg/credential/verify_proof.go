@@ -3,7 +3,7 @@ package credential
 import (
 	"fmt"
 
-	"github.com/suutaku/go-vc/internal/processor"
+	"github.com/suutaku/go-vc/pkg/processor"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/resolver"
 	"github.com/suutaku/go-vc/pkg/suite"

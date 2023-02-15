@@ -1,6 +1,6 @@
 package suite
 
-import "github.com/suutaku/go-vc/internal/processor"
+import "github.com/suutaku/go-vc/pkg/processor"
 
 type SignatureSuite interface {
 

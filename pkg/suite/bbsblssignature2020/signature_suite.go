@@ -2,8 +2,8 @@ package bbsblssignature2020
 
 import (
 	"github.com/suutaku/go-bbs/pkg/bbs"
-	"github.com/suutaku/go-vc/internal/processor"
 	"github.com/suutaku/go-vc/internal/tools"
+	"github.com/suutaku/go-vc/pkg/processor"
 )
 
 const (

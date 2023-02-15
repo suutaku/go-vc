@@ -5,8 +5,8 @@ import (
 	"sort"
 
 	"github.com/suutaku/go-bbs/pkg/bbs"
-	"github.com/suutaku/go-vc/internal/processor"
 	"github.com/suutaku/go-vc/internal/tools"
+	"github.com/suutaku/go-vc/pkg/processor"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/resolver"
 	"github.com/suutaku/go-vc/pkg/suite"

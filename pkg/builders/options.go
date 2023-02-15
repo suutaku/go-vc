@@ -3,7 +3,7 @@ package builders
 import (
 	"github.com/piprate/json-gold/ld"
 	"github.com/suutaku/go-bbs/pkg/bbs"
-	"github.com/suutaku/go-vc/internal/processor"
+	"github.com/suutaku/go-vc/pkg/processor"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/suite"
 	"github.com/suutaku/go-vc/pkg/suite/bbsblssignature2020"
