@@ -4,7 +4,11 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"net/url"
+	"path"
+	"strings"
 
 	"gitee.com/cotnetwork/dids/pkg/dids"
 	"github.com/btcsuite/btcutil/base58"
@@ -17,16 +21,26 @@ const (
 )
 
 type HTTPResolver struct {
+	base string
 }
 
-func NewHTTPResolver() *HTTPResolver {
-	return &HTTPResolver{}
+func NewHTTPResolver(url string) *HTTPResolver {
+	return &HTTPResolver{
+		base: url,
+	}
 }
 
-func (res *HTTPResolver) Resolve(url string) (*PublicKey, error) {
-	resp, err := http.Get(url)
+func (res *HTTPResolver) Resolve(id string) (*PublicKey, error) {
+	sp := strings.Split(id, "#")
+	url, err := url.Parse(res.base)
 	if err != nil {
 		return nil, err
+	}
+	url.Path = path.Join(url.Path, "did", sp[0])
+	resp, err := http.Get(url.String())
+	if err != nil || resp.StatusCode != 200 {
+		msg, _ := ioutil.ReadAll(resp.Body)
+		return nil, fmt.Errorf("%v %s", err, msg)
 	}
 	did := &dids.DIDDocument{}
 	err = json.NewDecoder(resp.Body).Decode(did)
@@ -35,22 +49,28 @@ func (res *HTTPResolver) Resolve(url string) (*PublicKey, error) {
 	}
 	ret := &PublicKey{Type: did.VerificationMethod[0].Type}
 
-	switch ret.Type {
-	case ldKeyType:
-		if did.VerificationMethod[0].PublicKeyJWK.Crv != "BLS12381_G2" || did.VerificationMethod[0].PublicKeyJWK.Kty != "EC" {
-			return nil, fmt.Errorf("invalid jwk")
+	for _, v := range did.VerificationMethod {
+		if v.ID != id {
+			continue
 		}
-		ret.Jwk, err = base64.URLEncoding.DecodeString(did.VerificationMethod[0].PublicKeyJWK.X)
-		if err != nil {
+		switch ret.Type {
+		case ldKeyType:
+			if v.PublicKeyJWK.Crv != "BLS12381_G2" || v.PublicKeyJWK.Kty != "EC" {
+				return nil, fmt.Errorf("invalid jwk")
+			}
+			ret.Jwk, err = base64.URLEncoding.DecodeString(v.PublicKeyJWK.X)
+			if err != nil {
+				return nil, err
+			}
+		case typeG2:
+			ret.Value = base58.Decode(v.PublicKeyBase58)
+			if ret.Value == nil {
+				return nil, err
+			}
+		case typeG1:
 			return nil, err
 		}
-	case typeG2:
-		ret.Value = base58.Decode(did.VerificationMethod[0].PublicKeyBase58)
-		if ret.Value == nil {
-			return nil, err
-		}
-	case typeG1:
-		return nil, err
 	}
+
 	return ret, nil
 }
