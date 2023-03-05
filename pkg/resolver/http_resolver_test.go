@@ -12,15 +12,15 @@ import (
 
 func TestHTTPResolver(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		val, err := test.GetTestResource(r.RequestURI)
+		val, err := test.GetTestResource("holder-did.json")
 		if err != nil {
 			fmt.Println("cannot resolve id")
 		}
 		w.Write(val)
 	}))
 	defer ts.Close()
-	resolver := NewHTTPResolver()
-	pub, err := resolver.Resolve(ts.URL + "/holder-did.json")
+	resolver := NewHTTPResolver(ts.URL)
+	pub, err := resolver.Resolve("did:cot:Bh5yujxVkMotaDEBSBWAZu6KXcezGKvamHvmCLsYY9DP")
 	assert.NoError(t, err)
 	assert.NotNil(t, pub)
 	t.Logf("%v\n", pub)
