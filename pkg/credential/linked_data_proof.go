@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/suutaku/go-vc/pkg/common"
 	"github.com/suutaku/go-vc/pkg/processor"
 	"github.com/suutaku/go-vc/pkg/proof"
 	"github.com/suutaku/go-vc/pkg/suite"
@@ -31,7 +32,7 @@ func (cred *Credential) AddLinkedDataProof(s suite.SignatureSuite, lcon *proof.L
 		Type:                    context.SignatureType,
 		SignatureRepresentation: context.SignatureRepresentation,
 		Creator:                 context.Creator,
-		Created:                 context.Created,
+		Created:                 common.NewFormatedTime(),
 		Domain:                  context.Domain,
 		Nonce:                   context.Nonce,
 		VerificationMethod:      context.VerificationMethod,
