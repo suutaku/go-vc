@@ -10,7 +10,7 @@ import (
 	"path"
 	"strings"
 
-	"gitee.com/cotnetwork/dids/pkg/dids"
+	"github.com/ComputingOfThings/dids/pkg/dids"
 	"github.com/btcsuite/btcutil/base58"
 )
 

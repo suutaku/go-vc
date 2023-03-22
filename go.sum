@@ -1,5 +1,7 @@
-gitee.com/cotnetwork/dids v0.0.0-20230128151723-7655875951de h1:VqEuBFgnUZc4MZky2AGKsbgDYwsG6twR8U6Bx9LKvsg=
-gitee.com/cotnetwork/dids v0.0.0-20230128151723-7655875951de/go.mod h1:Rg63tAx4wtS5pYUKYfFkO8Nxwz0g+2n8vkcjHoSZwQo=
+github.com/ComputingOfThings/dids v0.0.0-20230128151723-7655875951de h1:VqEuBFgnUZc4MZky2AGKsbgDYwsG6twR8U6Bx9LKvsg=
+github.com/ComputingOfThings/dids v0.0.0-20230128151723-7655875951de/go.mod h1:Rg63tAx4wtS5pYUKYfFkO8Nxwz0g+2n8vkcjHoSZwQo=
+github.com/ComputingOfThings/dids v0.0.0-20230322040344-4b6e840a439b h1:3XHphOieeTXMUcAmpc/co+DdZ0Lfv+H8J3/Y491B/mo=
+github.com/ComputingOfThings/dids v0.0.0-20230322040344-4b6e840a439b/go.mod h1:hMEdivw4VEPv1lgC+BNcshM5duAXRF3+4Dp/JiFF50k=
 github.com/aead/siphash v1.0.1/go.mod h1:Nywa3cDsYNNK3gaciGTWPwHt0wlpNV15vwmswBAUSII=
 github.com/btcsuite/btcd v0.20.1-beta/go.mod h1:wVuoA8VJLEcwgqHBwHmzLRazpKxTv13Px/pDuV7OomQ=
 github.com/btcsuite/btclog v0.0.0-20170628155309-84c8d2346e9f/go.mod h1:TdznJufoqS23FtqVCzL0ZqgP5MqXbb4fg/WgDys70nA=

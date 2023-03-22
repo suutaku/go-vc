@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 
-	"gitee.com/cotnetwork/dids/pkg/dids"
+	"github.com/ComputingOfThings/dids/pkg/dids"
 	"github.com/btcsuite/btcutil/base58"
 )
 
