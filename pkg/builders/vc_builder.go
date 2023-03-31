@@ -38,7 +38,7 @@ func NewVCBuilder(opts ...BuilderOption) *VCBuilder {
 		options.ldpCtx = &proof.LinkedDataProofContext{
 			SignatureType:           "BbsBlsSignature2020",
 			SignatureRepresentation: proof.SignatureProofValue,
-			VerificationMethod:      "did:example:123456#key1",
+			VerificationMethod:      options.did + "#owner",
 			Created:                 created,
 		}
 	}
