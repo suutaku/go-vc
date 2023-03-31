@@ -154,14 +154,14 @@ func TestBlindSign(t *testing.T) {
 	cred := getTestCredential(t)
 	assert.NotNil(t, cred, "cannot get credential")
 
-	revealed := getTestBlindRevealedCredential(t)
-	assert.NotNil(t, revealed, "cannot get revealed credential")
+	brevealed := getTestBlindRevealedCredential(t)
+	assert.NotNil(t, brevealed, "cannot get revealed credential")
 
-	ctx, idx, count, err := hBuilder.PreBlindSign(cred, revealed, iResolver, []byte("nonce"))
+	ctx, idx, count, err := hBuilder.PreBlindSign(cred, brevealed, iResolver, []byte("nonce"))
 	assert.NoError(t, err)
 	assert.NotNil(t, ctx, "cannot get blind signature context")
 
-	blindSignature, err := iBuilder.BlindSign(revealed, ctx, idx, count, []byte("nonce"))
+	blindSignature, err := iBuilder.BlindSign(brevealed, ctx, idx, count, []byte("nonce"))
 	assert.NoError(t, err)
 	assert.NotNil(t, blindSignature, "cannot get  signature context")
 
@@ -171,6 +171,14 @@ func TestBlindSign(t *testing.T) {
 	err = hBuilder.Verify(cred, iResolver)
 	assert.NoError(t, err, "invalid signature")
 	t.Logf("signed credential:\n%s\n", cred.ToString())
+	revealed := getTestRevealedCredential(t)
+	assert.NotNil(t, revealed, "cannot get revealed credential")
+	disclosure, err := hBuilder.GenerateBBSSelectiveDisclosure(cred, revealed, iResolver, []byte("nonce"))
+	assert.NoError(t, err, "cannot generate selective disclosure")
+	t.Logf("generated selective disclosure credential:\n%s\n", disclosure.ToString())
+
+	err = hBuilder.Verify(disclosure, iResolver)
+	assert.NoError(t, err, "invalid signature")
 }
 
 func TestStatusCredential(t *testing.T) {

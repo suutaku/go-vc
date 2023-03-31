@@ -1,0 +1,75 @@
+{
+  "@context": "https://w3id.org/security/v2",
+  "https://schema.org/description": {
+    "@value": "Credential signed by uni-signer for test",
+    "type": "xsd:string"
+  },
+  "https://schema.org/name": {
+    "@value": "UniWaUserInformation",
+    "type": "xsd:string"
+  },
+  "https://www.w3.org/2018/credentials#credentialSubject": {
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:区(县)": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:头像": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:姓名": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:市": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:性别": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:手机号": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:生日": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:用户名": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:省": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:职业": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:详细地址": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:身份证号码": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1:车牌号": {
+      "@value": "testdata",
+      "type": "https://schema.org/Text"
+    },
+    "type": "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1"
+  },
+  "https://www.w3.org/2018/credentials#issuer": {
+    "id": "did:cot:EhXSR8W1fLJnhaYQ3g8BLcszVsDorBs6NV7YfBe4rWgH"
+  },
+  "https://www.w3.org/2018/credentials#validFrom": {
+    "@value": "2023-03-30T23:40:52+08:00",
+    "type": "xsd:dateTime"
+  },
+  "id": "https://simple.server/1680248706",
+  "type": "https://www.w3.org/2018/credentials#VerifiableCredential"
+}

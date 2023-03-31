@@ -1,0 +1,23 @@
+{
+  "@context": [
+    "https://ssis.cotnetwork.com/v1/schema/credentials/v2.0",
+    "https://ssis.cotnetwork.com/v1/schema/bbs/v1",
+    "https://ssis.cotnetwork.com/v1/schema/UniWaUserInformation/v1.1"
+  ],
+  "@explicit": true,
+  "credentialSubject": {
+    "@explicit": true,
+    "type": [
+      "UniWaUserInformation"
+    ],
+    "身份证号码": "testdata",
+    "车牌号": "testdata"
+  },
+  "description": "Credential signed by uni-signer for test",
+  "issuer": "did:cot:EhXSR8W1fLJnhaYQ3g8BLcszVsDorBs6NV7YfBe4rWgH",
+  "name": "UniWaUserInformation",
+  "type": [
+    "VerifiableCredential"
+  ],
+  "validFrom": "2023-03-30T23:40:52+08:00"
+}

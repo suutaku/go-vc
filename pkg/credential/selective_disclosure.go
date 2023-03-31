@@ -75,8 +75,12 @@ func buildDocVerificationData(docCompacted, revealDoc map[string]interface{}, op
 	for i, row := range documentStatements {
 		transformedStatements[i] = processor.TransformBlankNode(string(row))
 	}
-	newOpts := append(opts, processor.WithFrameBlankNodes())
-	revealDocumentResult, err := processor.Default().Frame(docCompacted, revealDoc, newOpts...)
+	// newOpts := append(opts, processor.WithFrameBlankNodes())
+	// debug1, _ := json.Marshal(docCompacted)
+	// fmt.Printf("docCompacted:\n%s\n", debug1)
+	// debug2, _ := json.Marshal(revealDoc)
+	// fmt.Printf("docCompacted:\n%s\n", debug2)
+	revealDocumentResult, err := processor.Default().Frame(docCompacted, revealDoc, opts...)
 	if err != nil {
 		return nil, fmt.Errorf("frame doc with reveal doc: %w", err)
 	}

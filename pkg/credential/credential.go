@@ -11,22 +11,23 @@ import (
 )
 
 type Credential struct {
-	Context []string               `json:"@context,omitempty"`
-	Id      string                 `json:"id,omitempty"`
-	Type    []string               `json:"type,omitempty"`
-	Issuer  string                 `json:"issuer,omitempty"`
-	Issued  *common.FormatedTime   `json:"issuanceDate,omitempty"`
-	Expired *common.FormatedTime   `json:"expirationDate,omitempty"`
-	Subject interface{}            `json:"credentialSubject,omitempty"`
-	Proof   interface{}            `json:"proof,omitempty"`
-	Status  map[string]interface{} `json:"credentialStatus,omitempty"`
-	JWT     string                 `json:"jwt,omitempty"`
+	Context     []string               `json:"@context,omitempty"`
+	Id          string                 `json:"id,omitempty"`
+	Type        interface{}            `json:"type,omitempty"`
+	Subject     interface{}            `json:"credentialSubject,omitempty"`
+	ValidFrom   *common.FormatedTime   `json:"validFrom,omitempty"`
+	ValidUntil  *common.FormatedTime   `json:"validUntil,omitempty"`
+	Proof       interface{}            `json:"proof,omitempty"`
+	Status      map[string]interface{} `json:"credentialStatus,omitempty"`
+	Issuer      string                 `json:"issuer,omitempty"`
+	Evidence    interface{}            `json:"evidence,omitempty"`
+	Name        string                 `json:"name,omitempty"`
+	Description string                 `json:"description,omitempty"`
+	Holder      string                 `json:"holder,omitempty"`
 	// for advanced concepts
-	Schema   interface{}            `json:"credentialSchema,omitempty"`
-	Refresh  map[string]interface{} `json:"refreshService,omitempty"`
-	Terms    interface{}            `json:"termsOfUse,omitempty"`
-	Evidence interface{}            `json:"evidence,omitempty"`
-
+	Schema       interface{}            `json:"credentialSchema,omitempty"`
+	Refresh      map[string]interface{} `json:"refreshService,omitempty"`
+	Terms        interface{}            `json:"termsOfUse,omitempty"`
 	CustomFields map[string]interface{} `json:"-"`
 }
 
